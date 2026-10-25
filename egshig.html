@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Төрсөн өдрийн мэнд хүргэе миний хайраа! 💖✨</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Great+Vibes&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            background: #0f0c1b;
+            color: #fce7f3;
+        }
+        .font-romantic {
+            font-family: 'Pacifico', cursive;
+        }
+        .font-cursive {
+            font-family: 'Great Vibes', cursive;
+        }
+
+        /* Glassmorphism visual tokens */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 192, 203, 0.2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(244, 114, 182, 0.3);
+            box-shadow: 0 10px 30px rgba(236, 72, 153, 0.15);
+        }
+
+        .glow-pink {
+            box-shadow: 0 0 35px rgba(236, 72, 153, 0.5), 0 0 15px rgba(244, 114, 182, 0.3);
+        }
+
+        .text-glow {
+            text-shadow: 0 0 20px rgba(244, 114, 182, 0.6), 0 0 40px rgba(236, 72, 153, 0.4);
+        }
+
+        /* Animations */
+        @keyframes pulseGlow {
+            0%, 100% { filter: drop-shadow(0 0 15px rgba(244, 114, 182, 0.6)); transform: scale(1); }
+            50% { filter: drop-shadow(0 0 30px rgba(236, 72, 153, 0.9)); transform: scale(1.03); }
+        }
+
+        .heart-pulse {
+            animation: pulseGlow 2.5s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(2deg); }
+        }
+
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f0c1b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ec4899;
+            border-radius: 9999px;
+        }
+
+        /* Dodging button smooth transition */
+        #btn-no {
+            transition: all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            touch-action: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen relative flex flex-col justify-between selection:bg-pink-500 selection:text-white">
+
+    <!-- Interactive Falling Rain & Sparkling Hearts Canvas -->
+    <canvas id="bg-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
+    <!-- Top Floating Audio & Celebration Control Bar -->
+    <div class="fixed top-4 right-4 z-50 flex items-center gap-3">
+        <!-- Audio Synthesizer / Ambient Music Toggle Button -->
+        <button id="audio-toggle" onclick="toggleAudio()" class="glass-panel p-3.5 rounded-full text-pink-300 hover:text-white hover:bg-pink-600/40 transition-all duration-300 flex items-center justify-center shadow-lg border border-pink-400/30 group" title="Хөгжим тоглуулах">
+            <i id="audio-icon" class="fas fa-music text-lg group-hover:scale-110 transition-transform"></i>
+        </button>
+    </div>
+
+    <!-- MAIN INTERACTIVE CONTAINER -->
+    <main class="relative z-10 w-full max-w-5xl mx-auto px-4 py-8 min-h-screen flex flex-col justify-center items-center">
+
+        <!-- =================================================== -->
+        <!-- SCREEN 1: FIRST INTRO SCREEN ("Chi nadaa hairtaiyu?") -->
+        <!-- =================================================== -->
+        <section id="screen-intro" class="w-full flex flex-col items-center justify-center min-h-[85vh] text-center transition-all duration-700">
+            <div id="intro-card-box" class="glass-panel p-8 sm:p-14 rounded-3xl max-w-xl w-full relative overflow-hidden heart-pulse border border-pink-500/40">
+                
+                <!-- Romantic Glow Aura -->
+                <div class="absolute -top-24 -left-24 w-48 h-48 bg-pink-500/30 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-purple-500/30 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="relative z-10">
+                    <div class="inline-block p-4 rounded-full bg-pink-500/20 text-pink-300 text-4xl mb-6 shadow-inner border border-pink-400/30">
+                        💖
+                    </div>
+
+                    <h1 class="font-romantic text-3xl sm:text-5xl text-pink-200 text-glow mb-4 leading-tight">
+                        Чи надад хайртай юу?
+                    </h1>
+                    
+                    <p class="text-pink-100/80 text-sm sm:text-base font-light mb-10 max-w-md mx-auto">
+                        Сэтгэлээсээ үнэнээ хэлээрэй... Би зөвхөн ганцхан хариултыг л зөвшөөрнө шүү! 😉✨
+                    </p>
+
+                    <!-- Interactive Dodging Buttons Area -->
+                    <div id="dodging-area" class="relative w-full h-36 flex items-center justify-center gap-6">
+                        <!-- YES BUTTON -->
+                        <button id="btn-yes" onclick="handleYesClicked()" class="px-9 py-4 bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600 text-white font-bold text-lg rounded-full shadow-lg shadow-pink-500/50 hover:shadow-pink-500/80 hover:scale-110 active:scale-95 transition-all duration-300 flex items-center gap-3 z-20 cursor-pointer">
+                            <span>Тийм! ❤️</span>
+                        </button>
+
+                        <!-- NO BUTTON (Dodges mouse / touch) -->
+                        <button id="btn-no" onmouseover="dodgeButton()" ontouchstart="dodgeButton(event)" onclick="dodgeButton()" class="px-8 py-3.5 bg-slate-800/80 text-pink-200 font-semibold text-base rounded-full border border-pink-400/20 shadow-md z-10 whitespace-nowrap">
+                            Үгүй 🙈
+                        </button>
+                    </div>
+
+                    <!-- Dynamic Hint Message -->
+                    <p id="dodge-hint" class="text-xs sm:text-sm text-pink-300/80 mt-4 min-h-[20px] font-medium transition-all"></p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- =================================================== -->
+        <!-- SCREEN 2: MAIN BIRTHDAY APP (Hidden initially) -->
+        <!-- =================================================== -->
+        <div id="screen-main-app" class="w-full hidden space-y-16 transition-all duration-1000 opacity-0 transform translate-y-8">
+            
+            <!-- App Header & Navigation -->
+            <header class="glass-panel p-4 sm:p-6 rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-4 border border-pink-500/30">
+                <div class="flex items-center gap-3">
+                    <span class="text-3xl"></span>
+                    <h1 class="font-romantic text-2xl sm:text-3xl text-pink-300 text-glow">Хайрт Эгшиглэнд</h1>
+                </div>
+
+                <nav class="flex flex-wrap justify-center gap-2 text-xs sm:text-sm font-semibold text-pink-200">
+                    <button onclick="scrollToSection('sec-header')" class="px-4 py-2 rounded-full hover:bg-pink-500/20 transition-all border border-transparent hover:border-pink-400/30">
+                        Мэндчилгээ
+                    </button>
+                    <button onclick="scrollToSection('sec-cards')" class="px-4 py-2 rounded-full hover:bg-pink-500/20 transition-all border border-transparent hover:border-pink-400/30">
+                        Дурсамж
+                    </button>
+                    <button onclick="scrollToSection('sec-letter')" class="px-4 py-2 rounded-full hover:bg-pink-500/20 transition-all border border-transparent hover:border-pink-400/30">
+                        Захидал 💌
+                    </button>
+                </nav>
+            </header>
+
+            <!-- SECTION 1: BIRTHDAY HERO WISH -->
+            <section id="sec-header" class="text-center space-y-6 pt-4">
+                <div class="glass-panel p-8 sm:p-14 rounded-3xl max-w-3xl mx-auto relative overflow-hidden floating">
+                    <div class="inline-block px-4 py-1.5 bg-pink-500/20 border border-pink-400/30 rounded-full text-pink-300 text-xs font-semibold tracking-wider uppercase mb-4">
+                        ✨ Онцгой баярын өдөр ✨
+                    </div>
+
+                    <h2 class="font-romantic text-4xl sm:text-6xl text-pink-200 text-glow leading-tight mb-6">
+                        Төрсөн өдрийн баярын<br>мэнд хүргэе! 🎂💖
+                    </h2>
+
+                    <p class="text-pink-100/90 text-base sm:text-lg font-light leading-relaxed max-w-2xl mx-auto mb-8">
+                        Үзэсгэлэнт минь, өнөөдөр бол хорвоод хамгийн хөөрхөн, ухаалаг, чамин охин мэндэлсэн өдөр! Чамтайгаа хамт байгаа хором бүхэн миний хувьд хамгийн том бэлэг юм шүү.
+                    </p>
+
+                    <div class="flex justify-center">
+                        <button onclick="fireCelebrationConfetti()" class="px-8 py-3.5 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold rounded-full shadow-lg shadow-pink-500/40 hover:scale-105 transition-all duration-300 flex items-center gap-2">
+                            <span>дараарай</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2: ROMANTIC MEMORY & LOVE CARDS -->
+            <section id="sec-cards" class="space-y-6">
+                <div class="text-center space-y-2">
+                    <h3 class="font-romantic text-3xl sm:text-4xl text-pink-300 text-glow">Хайрын дурсамжууд 🌸</h3>
+                    <p class="text-xs sm:text-sm text-pink-200/70">Карт бүр дээр дарж чамд зориулсан тусгай сэтгэлийн үгсийг уншаарай</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div onclick="flipCard(this)" class="glass-card p-6 rounded-2xl cursor-pointer hover:-translate-y-2 hover:border-pink-400 transition-all duration-300 group relative">
+                        <div class="text-pink-400 text-3xl mb-4 group-hover:scale-110 transition-transform">✨</div>
+                        <h4 class="font-bold text-lg text-pink-200 mb-2">Чиний инээмсэглэл</h4>
+                        <p class="text-pink-100/80 text-sm font-light leading-relaxed">
+                            Чиний минь инээмсэглэл нь харанхуй өдрийг ч гэрэлтүүлж, сэтгэлд дулаан мэдрэмж өгдөг. Үргэлж миний дэлхийг гэрэлтүүлж яваарай.
+                        </p>
+                    </div>
+
+                    <div onclick="flipCard(this)" class="glass-card p-6 rounded-2xl cursor-pointer hover:-translate-y-2 hover:border-pink-400 transition-all duration-300 group relative">
+                        <div class="text-pink-400 text-3xl mb-4 group-hover:scale-110 transition-transform">🧸</div>
+                        <h4 class="font-bold text-lg text-pink-200 mb-2">Хамтдаа өнгөрүүлсэн мөч</h4>
+                        <p class="text-pink-100/80 text-sm font-light leading-relaxed">
+                            Чамтайгаа цуг байхад цаг хугацаа ямар хурдан өнгөрдөг гэж бодно. Хором бүр нь миний амьдралын хамгийн нандин дурсамж шүү миний хайраа.
+                        </p>
+                    </div>
+
+                    <div onclick="flipCard(this)" class="glass-card p-6 rounded-2xl cursor-pointer hover:-translate-y-2 hover:border-pink-400 transition-all duration-300 group relative">
+                        <div class="text-pink-400 text-3xl mb-4 group-hover:scale-110 transition-transform">🌹</div>
+                        <h4 class="font-bold text-lg text-pink-200 mb-2">Миний бахархал</h4>
+                        <p class="text-pink-100/80 text-sm font-light leading-relaxed">
+                            Чи бол хамгийн хөөрхөн, ухаалаг, эелдэг, сайн сэтгэлтэй. Чинийхээ найз залуу нь гэдгээрээ би үргэлж бахархдаг шүү.
+                        </p>
+                    </div>
+
+                    <div onclick="flipCard(this)" class="glass-card p-6 rounded-2xl cursor-pointer hover:-translate-y-2 hover:border-pink-400 transition-all duration-300 group relative">
+                        <div class="text-pink-400 text-3xl mb-4 group-hover:scale-110 transition-transform">👑</div>
+                        <h4 class="font-bold text-lg text-pink-200 mb-2">Хайртдаа</h4>
+                        <p class="text-pink-100/80 text-sm font-light leading-relaxed">
+                            Намайг үргэлж ойлгож, дэмжиж, хайрладагт чинь баярлалаа. Чи бол миний амьдралын хамгийн сайхан бэлэг.
+                        </p>
+                    </div>
+
+                    <div onclick="flipCard(this)" class="glass-card p-6 rounded-2xl cursor-pointer hover:-translate-y-2 hover:border-pink-400 transition-all duration-300 group relative">
+                        <div class="text-pink-400 text-3xl mb-4 group-hover:scale-110 transition-transform">🌙</div>
+                        <h4 class="font-bold text-lg text-pink-200 mb-2">Хүсэл мөрөөдөл</h4>
+                        <p class="text-pink-100/80 text-sm font-light leading-relaxed">
+                            Өнөөдөр чиний минь сэтгэлдээ бодсон бүх хүсэл, мөрөөдөл чинь биелж, ирээдүй чинь гэрэлтэй байгаасай
+                        </p>
+                    </div>
+
+                    <div onclick="flipCard(this)" class="glass-card p-6 rounded-2xl cursor-pointer hover:-translate-y-2 hover:border-pink-400 transition-all duration-300 group relative">
+                        <div class="text-pink-400 text-3xl mb-4 group-hover:scale-110 transition-transform">💎</div>
+                        <h4 class="font-bold text-lg text-pink-200 mb-2">Үүрд хамтдаа</h4>
+                        <p class="text-pink-100/80 text-sm font-light leading-relaxed">
+                            Би чамдаа хязгааргүй их хайртай. Энэ хайр минь өдөр ирэх тусам улам гүнзгийрч, үүрд үргэлжлэх болно.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 3: LOVE LETTER BOX -->
+            <section id="sec-letter" class="max-w-3xl mx-auto pt-6 pb-12">
+                <div class="glass-panel p-8 sm:p-12 rounded-3xl relative border border-pink-500/40 space-y-6">
+                    <div class="flex items-center justify-between border-b border-pink-500/30 pb-4">
+                        <div class="flex items-center gap-3">
+                            <span class="text-3xl">💌</span>
+                            <h3 class="font-romantic text-2xl sm:text-3xl text-pink-300">Миний чамд бичсэн захидал</h3>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 text-pink-100/90 text-base sm:text-lg font-light leading-relaxed font-cursive text-xl sm:text-2xl tracking-wide">
+                        <p>Хайрт минь,</p>
+                        <p>
+                            Төрсөн өдрийн халуун баярын мэнд хүргэе! Энэ хорвоод чи минь ирсэнд, бас миний амьдралыг гэрэлтүүлэн хажууд минь байгаад би үнэхээр их баярладаг. 
+                        </p>
+                        <p>
+                            Чиний минь зөөлөн сэтгэл, дулаан инээмсэглэл, намайг гэх хайр чинь миний өдөр бүрийн хамгийн том аз жаргал байдаг. Чамтайгаа байхад би дэлхийн хамгийн азтай хүн шиг санагддаг шүү.
+                        </p>
+                        <p>
+                            Шинэ нас чинь чамд минь зөвхөн аз жаргал, инээд хөөр, амжилт, эрүүл энхийг авчрах болтугай. Би үргэлж чинийхээ хажууд байж, чамайгаа хайрлаж, хамгаалж явна аа! 💖
+                        </p>
+                        <p class="text-right pt-4 text-pink-300 font-bold font-romantic text-2xl">
+                            Үүрд чамдаа хайртай, Найз залуу нь 💋
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 text-center py-6 text-xs text-pink-300/60 font-light">
+        <p>Зөвхөн миний үзэсгэлэнт хайртдаа зориулан бүтээв 💖</p>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC & ANIMATIONS -->
+    <script>
+        const dodgeMessages = [
+            "Өөө! Энэ товчлуураас зугтаад байна уу? 😜",
+            "Үгүй гэж хэлж болохгүй ээ! 🙈",
+            "Дахин оролдоод үз дээ, хэхэ 💖",
+            "Заавал 'Тийм' гэж дарна шүү! 😤",
+            "Зүрх маань 'Үгүй' гэхийг зөвшөөрөхгүй байна! 🥺",
+            "Тийм дээр дараарай даа хайраа! ✨"
+        ];
+
+        function dodgeButton(e) {
+            if (e) e.preventDefault();
+
+            const btnNo = document.getElementById('btn-no');
+            const area = document.getElementById('dodging-area');
+            const hint = document.getElementById('dodge-hint');
+
+            const randomMsg = dodgeMessages[Math.floor(Math.random() * dodgeMessages.length)];
+            hint.textContent = randomMsg;
+
+            const areaBounds = area.getBoundingClientRect();
+            const btnBounds = btnNo.getBoundingClientRect();
+
+            const maxX = areaBounds.width - btnBounds.width - 20;
+            const maxY = areaBounds.height - btnBounds.height - 10;
+
+            const randomX = Math.max(10, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(10, Math.floor(Math.random() * maxY));
+
+            btnNo.style.position = 'absolute';
+            btnNo.style.left = `${randomX}px`;
+            btnNo.style.top = `${randomY}px`;
+        }
+
+        function handleYesClicked() {
+            fireCelebrationConfetti();
+
+            const introScreen = document.getElementById('screen-intro');
+            const mainApp = document.getElementById('screen-main-app');
+
+            introScreen.style.opacity = '0';
+            introScreen.style.transform = 'scale(0.95)';
+
+            setTimeout(() => {
+                introScreen.classList.add('hidden');
+                mainApp.classList.remove('hidden');
+
+                setTimeout(() => {
+                    mainApp.style.opacity = '1';
+                    mainApp.style.transform = 'translateY(0)';
+                }, 50);
+            }, 500);
+
+            if(!audioCtx) initAudio();
+        }
+
+        function fireCelebrationConfetti() {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ec4899', '#f472b6', '#fb7185', '#a855f7', '#d8b4fe']
+            });
+
+            setTimeout(() => {
+                confetti({
+                    particleCount: 60,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 }
+                });
+            }, 250);
+
+            setTimeout(() => {
+                confetti({
+                    particleCount: 60,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 }
+                });
+            }, 400);
+        }
+
+        function scrollToSection(sectionId) {
+            const sec = document.getElementById(sectionId);
+            if(sec) {
+                sec.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function flipCard(card) {
+            card.classList.toggle('bg-pink-500/20');
+            card.classList.toggle('border-pink-400');
+        }
+
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let w, h;
+        function resize() {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * w;
+                this.y = Math.random() * -h;
+                this.size = Math.random() * 8 + 4;
+                this.speedY = Math.random() * 1.5 + 0.8;
+                this.speedX = (Math.random() - 0.5) * 0.6;
+                this.opacity = Math.random() * 0.6 + 0.2;
+                this.isHeart = Math.random() > 0.35;
+            }
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX;
+                if (this.y > h + 20) {
+                    this.reset();
+                    this.y = -20;
+                }
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.opacity;
+                if (this.isHeart) {
+                    ctx.font = `${this.size * 2}px sans-serif`;
+                    ctx.fillText('💖', this.x, this.y);
+                } else {
+                    ctx.fillStyle = '#f472b6';
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size * 0.5, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.restore();
+            }
+        }
+
+        const particles = [];
+        const count = Math.min(window.innerWidth > 768 ? 40 : 20, 50);
+        for(let i = 0; i < count; i++) {
+            particles.push(new Particle());
+        }
+
+        function renderParticles() {
+            ctx.clearRect(0, 0, w, h);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(renderParticles);
+        }
+        renderParticles();
+
+        let audioCtx = null;
+        let isPlaying = false;
+        let timerId = null;
+
+        function initAudio() {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            audioCtx = new AudioContext();
+        }
+
+        function playRomanticChords() {
+            if(!audioCtx) initAudio();
+            if(audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            const notes = [261.63, 329.63, 392.00, 523.25, 440.00, 349.23];
+            let noteIdx = 0;
+
+            timerId = setInterval(() => {
+                if(!isPlaying) return;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(notes[noteIdx % notes.length], audioCtx.currentTime);
+
+                gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 2.5);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start();
+                osc.stop(audioCtx.currentTime + 2.5);
+
+                noteIdx++;
+            }, 1200);
+        }
+
+        function toggleAudio() {
+            const icon = document.getElementById('audio-icon');
+            if(!isPlaying) {
+                isPlaying = true;
+                icon.className = 'fas fa-volume-up text-lg text-pink-400 animate-pulse';
+                playRomanticChords();
+            } else {
+                isPlaying = false;
+                if(timerId) clearInterval(timerId);
+                icon.className = 'fas fa-music text-lg';
+            }
+        }
+    </script>
+</body>
+</html>
